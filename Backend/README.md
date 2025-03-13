@@ -99,3 +99,109 @@ curl -X POST http://your-api-domain/users/register \
 - Password is never returned in the response
 - SocketID is required for real-time communication features
 - All timestamps are in ISO 8601 format 
+
+## Get User Profile
+Retrieves the profile information of the authenticated user.
+
+### Endpoint
+```
+GET /users/profile
+```
+
+### Headers
+```
+Authorization: Bearer JWT_TOKEN
+```
+
+### Success Response
+**Status Code**: `200 OK`
+```json
+{
+    "user": {
+        "fullname": {
+            "firstname": "string",
+            "lastname": "string"
+        },
+        "email": "string",
+        "socketID": "string"
+    }
+}
+```
+
+### Error Responses
+
+#### Unauthorized
+**Status Code**: `401 Unauthorized`
+```json
+{
+    "error": "Access denied. No token provided."
+}
+```
+
+#### Invalid Token
+**Status Code**: `401 Unauthorized`
+```json
+{
+    "error": "Invalid token"
+}
+```
+
+### Example Request
+```bash
+curl -X GET http://your-api-domain/users/profile \
+  -H "Authorization: Bearer your_jwt_token"
+```
+
+## Logout User
+Invalidates the current JWT token, effectively logging out the user.
+
+### Endpoint
+```
+GET /users/logout
+```
+
+### Headers
+```
+Authorization: Bearer JWT_TOKEN
+```
+
+### Success Response
+**Status Code**: `200 OK`
+```json
+{
+    "message": "Successfully logged out"
+}
+```
+
+### Error Responses
+
+#### Unauthorized
+**Status Code**: `401 Unauthorized`
+```json
+{
+    "error": "Access denied. No token provided."
+}
+```
+
+#### Invalid Token
+**Status Code**: `401 Unauthorized`
+```json
+{
+    "error": "Invalid token"
+}
+```
+
+### Security Features
+- The JWT token is added to a blacklist
+- Blacklisted tokens automatically expire after 24 hours
+- Subsequent requests with the blacklisted token will be rejected
+
+### Example Request
+```bash
+curl -X GET http://your-api-domain/users/logout \
+  -H "Authorization: Bearer your_jwt_token"
+```
+
+### Notes
+- After logout, the token will be invalidated and cannot be used for future requests
+- A new login will be required to obtain a new valid token 
