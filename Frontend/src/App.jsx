@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Userlogin from './pages/Userlogin'
 import UsersSignup from './pages/UsersSignup'
-import Captainlogin from './pages/Captainlogin'
+// import Captainlogin from './pages/Captainlogin'
 import Captainsignup from './pages/Captainsignup'
 
 
@@ -13,10 +13,10 @@ import Captainsignup from './pages/Captainsignup'
     return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/userlogin" element={<Userlogin />} />
         <Route path="/usersignup" element={<UsersSignup />} />
-        <Route path="/captainlogin" element={<Captainlogin />} />
+        {/* <Route path="/captainlogin" element={<Captainlogin />} /> */}
         <Route path="/captains" element={<Captainsignup />} />
       </Routes>
     </div>
